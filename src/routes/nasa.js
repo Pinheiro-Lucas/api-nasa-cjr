@@ -36,7 +36,7 @@ class Nasa {
 const nasa = new Nasa()
 
 // função que lida com a requisição vinda do slack
-module.exports = async (req, res) => {
+async function commands(req, res) {
   const [comando, ...params] = req.body.text.split(' ')
 
   try {
@@ -50,3 +50,6 @@ module.exports = async (req, res) => {
 
   res.status(200).send()
 }
+
+
+module.exports = commands

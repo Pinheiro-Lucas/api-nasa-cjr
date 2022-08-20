@@ -8,27 +8,18 @@ if (!fs.existsSync("./config.json") || !fs.existsSync("./src/database/data.json"
 
 const express = require("express")
 const config = require("../config.json")
-// Não precisa mais usar o bodyParser
-//const bodyParser = require("body-parser")
-
-const ping = require("./routes/ping")
-const nasa = require("./routes/nasa")
+const routes = require("./routes")
 
 // Configurações da API
 const PORT = config.port
 const app = express();
 
 // Json e parser urlencoded (integrados na v4)
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(routes)
 
 
 app.listen(PORT, () => {
     console.log(`Rodando na porta ${PORT}`);
 })
-
-
-// Comandos
-app.post("/teste", nasa) // usa server diferente
-app.post("/nasa", nasa)
-app.get("/", ping.ping)

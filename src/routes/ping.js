@@ -5,4 +5,4 @@ async function ping (req, res) {
     res.status(200).send("Pong")
 }
 
-module.exports = { ping }
+module.exports = ping
