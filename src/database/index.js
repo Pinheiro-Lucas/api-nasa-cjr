@@ -14,7 +14,7 @@ const update = (column, value) => {
     data[column].push(value)
     // Parâmetros: \t (identação com tab)
     const jsonString = JSON.stringify(data, null, "\t")
-    fs.writeFile(PATH_DB, jsonString, () => {})
+    fs.writeFileSync(PATH_DB, jsonString, () => {})
 }
 
 // Função para retirar um valor específico do banco
@@ -22,7 +22,7 @@ const remove = (column, value) => {
     const data = load()
     data[column].splice(data[column].indexOf(value), 1)
     const jsonString = JSON.stringify(data)
-    fs.writeFile(PATH_DB, jsonString, () => {})
+    fs.writeFileSync(PATH_DB, jsonString, () => {})
 }
 
 
