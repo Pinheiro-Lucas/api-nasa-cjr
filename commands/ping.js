@@ -1,8 +1,8 @@
 const webhook = require("../src/webhook.js")
 
-function ping (req, res) {
-    webhook.send("Pong")
-    res.status(200).send()
+async function ping (req, res) {
+    await webhook.send("Pong")
+    res.status(200).send("Pong")
 }
 
 module.exports = { ping }

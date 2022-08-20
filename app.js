@@ -11,7 +11,7 @@ const config = require("./config.json")
 // Não precisa mais usar o bodyParser
 //const bodyParser = require("body-parser")
 
-const ping = require("./commands/ping.js")
+const ping = require("./commands/ping")
 const nasa = require("./commands/nasa")
 
 // Configurações da API
@@ -29,5 +29,6 @@ app.listen(PORT, () => {
 
 
 // Comandos
-app.post("/nasa", (req, res) => nasa.commands(req, res))
-app.post("/", ping.ping)
+app.post("/teste", nasa.commands)
+app.post("/nasa", nasa.commands)
+app.get("/", ping.ping)
