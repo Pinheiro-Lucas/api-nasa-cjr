@@ -5,8 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js --ignore '**/*.json'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +24,11 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
+  },
+  "nodemonConfig": {
+    "ignore": ["**/*.json"],
+    "events": {
+      "start": "clear"
+    }
   }
 }

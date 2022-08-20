@@ -21,5 +21,6 @@ app.use(routes)
 
 
 app.listen(PORT, () => {
-    console.log(`Rodando na porta ${PORT}`);
+  const datetime = new Date().toLocaleString('pt-BR', { hour12: false })
+  console.log(`${datetime}: server rodando na porta ${PORT}`);
 })
