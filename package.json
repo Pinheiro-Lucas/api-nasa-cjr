@@ -2,10 +2,10 @@
   "name": "api-nasa-cjr",
   "version": "0.1",
   "description": "API para integrar funções no Slack",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js --ignore '**/*.json'",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js --ignore '**/*.json'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,8 +1,7 @@
 const fs = require("fs")
-const config = require("../config.json")
 
-PATH_DB = config.database
-const database = require("../" + PATH_DB)
+const PATH_DB = "./data.json"
+const database = require(PATH_DB)
 
 // Função para carregar o banco
 const load = () => {

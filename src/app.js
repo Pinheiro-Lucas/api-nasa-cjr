@@ -1,18 +1,18 @@
 // Checagem de banco e config
 const fs = require("fs")
 
-if (!fs.existsSync("./config.json") || !fs.existsSync("./database/data.json")) {
+if (!fs.existsSync("./config.json") || !fs.existsSync("./src/database/data.json")) {
     console.log("CONFIGURE TUDO ANTES DE USAR A API")
     process.exit()
 }
 
 const express = require("express")
-const config = require("./config.json")
+const config = require("../config.json")
 // Não precisa mais usar o bodyParser
 //const bodyParser = require("body-parser")
 
-const ping = require("./commands/ping")
-const nasa = require("./commands/nasa")
+const ping = require("./routes/ping")
+const nasa = require("./routes/nasa")
 
 // Configurações da API
 const PORT = config.port

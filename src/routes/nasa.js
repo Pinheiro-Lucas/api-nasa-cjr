@@ -1,5 +1,5 @@
-const database = require("../src/database")
-const webhook = require("../src/webhook")
+const database = require("../database")
+const webhook = require("../helpers/webhook")
 
 
 class Nasa {
@@ -33,21 +33,20 @@ class Nasa {
     await webhook.send(`Fila:\n${membros}`)
   }
 }
+const nasa = new Nasa()
 
-async function commands(req, res) {
-    const nasa = new Nasa()
-    const [comando, ...params] = req.body.text.split(' ')
+// função que lida com a requisição vinda do slack
+module.exports = async (req, res) => {
+  const [comando, ...params] = req.body.text.split(' ')
 
-    try {
-        if (nasa[comando] === undefined) 
-          throw new Error(`Comando "${comando}" não encontrado.`)
+  try {
+      if (nasa[comando] === undefined) 
+        throw new Error(`Comando "${comando}" não encontrado.`)
 
-        nasa[comando](params)
-    } catch(err) {
-        await webhook.send(`Deu errado! (${err})`)
-    }
+      await nasa[comando](params)
+  } catch(err) {
+      await webhook.send(`Deu errado! (${err})`)
+  }
 
-    res.status(200).send()
+  res.status(200).send()
 }
-
-module.exports = commands

@@ -1,4 +1,4 @@
-const webhook = require("../src/webhook.js")
+const webhook = require("../helpers/webhook")
 
 async function ping (req, res) {
     await webhook.send("Pong")
