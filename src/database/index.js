@@ -25,9 +25,15 @@ const remove = (column, value) => {
     fs.writeFileSync(PATH_DB, jsonString, () => {})
 }
 
+const read = (column) => {
+  const data = load()
+  return data[column]
+}
+
 
 module.exports = {
     load,
+    read,
     update,
     remove
 }

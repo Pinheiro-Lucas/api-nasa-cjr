@@ -5,32 +5,29 @@ const webhook = require("../helpers/webhook")
 class Nasa {
   // Adiciona um membro na nasa
   async adicionar(params) {
-    const nome = params.join(' ')
-    database.update("membros-nasa", `<${nome}>`)
+    const membro = params.join(' ')
+    database.update("membros-nasa", `${membro}`)
 
-    await webhook.send(`Membro <${nome}> adicionado`)
+    await webhook.send(`Membro <${membro}> adicionado`)
   }
 
   // Puxa o próximo membro da fila
   async proximo(params) {
-    const data = database.load()
     const column = "membros-nasa"
-    const membro = data[column][0]
-    
+    const membros = database.read(column)
+    const membro = membros[0]
+
     database.remove(column, membro)
     database.update(column, membro)
 
-    await webhook.send(`Próximo membro: ${membro}`)
+    await webhook.send(`Próximo membro: <${membro}>`)
   }
 
   // Retorna a fila de membros sem alterá-la
   async fila(params) {
-    const data = database.load()
-    const membros = data["membros-nasa"]
-      .map(membro => membro.slice(1,-1)) // tira os <>
-      .join("\n")
+    const membros = database.read("membros-nasa")
 
-    await webhook.send(`Fila:\n${membros}`)
+    await webhook.send(`Fila:\n${membros.join("\n")}`)
   }
 }
 const nasa = new Nasa()
