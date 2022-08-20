@@ -29,6 +29,6 @@ app.listen(PORT, () => {
 
 
 // Comandos
-app.post("/teste", nasa.commands)
-app.post("/nasa", nasa.commands)
+app.post("/teste", nasa) // usa server diferente
+app.post("/nasa", nasa)
 app.get("/", ping.ping)
