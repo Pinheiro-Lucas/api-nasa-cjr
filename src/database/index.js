@@ -1,39 +1,42 @@
 const fs = require("fs")
 
-const PATH_DB = "./data.json"
-const database = require(PATH_DB)
+const PATH_DB = process.cwd() + "/src/database/data.json"
 
-// Função para carregar o banco
-const load = () => {
-    return database
+/** Lê o banco */ 
+const read = () => {
+  const data = fs.readFileSync(PATH_DB, 'utf-8', () => {})
+  return JSON.parse(data)
 }
 
-// Função para atualizar o banco
-const update = (column, value) => {
-    const data = load()
-    data[column].push(value)
-    // Parâmetros: \t (identação com tab)
-    const jsonString = JSON.stringify(data, null, "\t")
-    fs.writeFileSync(PATH_DB, jsonString, () => {})
+/** Escreve no banco */ 
+const write = (data) => {
+  const jsonString = JSON.stringify(data, null, "\t")
+  fs.writeFileSync(PATH_DB, jsonString, () => {})
 }
 
-// Função para retirar um valor específico do banco
-const remove = (column, value) => {
-    const data = load()
-    data[column].splice(data[column].indexOf(value), 1)
-    const jsonString = JSON.stringify(data)
-    fs.writeFileSync(PATH_DB, jsonString, () => {})
-}
-
-const read = (column) => {
-  const data = load()
+/** Lê uma coluna específica do banco */
+const readColumn = (column) => {
+  const data = read()
   return data[column]
 }
 
+/** Atualiza o banco */
+const update = (column, value) => {
+    const data = read()
+    data[column].push(value)
+    write(data)
+}
+
+/** Retira um valor específico do banco */
+const remove = (column, value) => {
+    const data = read()
+    data[column].splice(data[column].indexOf(value), 1)
+    write(data)
+}
 
 module.exports = {
-    load,
-    read,
+    load: read,
+    read: readColumn,
     update,
     remove
 }
