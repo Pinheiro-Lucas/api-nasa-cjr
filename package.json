@@ -20,13 +20,16 @@
   "homepage": "https://github.com/Pinheiro-Lucas/api-nasa-cjr#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "dayjs": "^1.11.5",
     "express": "^4.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
   },
   "nodemonConfig": {
-    "ignore": ["**/*.json"],
+    "ignore": [
+      "**/*.json"
+    ],
     "events": {
       "start": "clear"
     }
