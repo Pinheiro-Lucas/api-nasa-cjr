@@ -1,24 +1,24 @@
 // Checagem de banco e config
+require('dotenv').config() // .env
 const fs = require("fs")
 
-if (!fs.existsSync("./config.json") || !fs.existsSync("./src/database/data.json")) {
+if (!fs.existsSync("./.env") || !fs.existsSync("./src/database/data.json")) {
     console.log("CONFIGURE TUDO ANTES DE USAR A API")
     process.exit()
 }
 
+// imports
 const express = require("express")
-const config = require("../config.json")
 const routes = require("./routes")
 
 // Configurações da API
-const PORT = config.port
+const PORT = process.env.PORT
 const app = express();
 
-// Json e parser urlencoded (integrados na v4)
+// middlewares
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(routes)
-
 
 app.listen(PORT, () => {
   const datetime = new Date().toLocaleString('pt-BR', { hour12: false })
