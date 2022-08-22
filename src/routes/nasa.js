@@ -14,7 +14,7 @@ class Nasa {
   // Adiciona um membro na nasa
   async adicionar() {
     const membro = this._params.join(' ')
-    database.update("membros-nasa", `${membro}`)
+    database.update("membros-nasa", membro)
 
     await webhook.send(`Membro <${membro}> adicionado`)
   }
@@ -22,7 +22,7 @@ class Nasa {
   // Puxa o próximo membro da fila
   async proximos() {
     const column = "membros-nasa"
-    const membros = database.read(column)
+    const membros = database.readColumn(column).sort()
 
     const weekNum = dayjs().week()
     const regerencia = membros[(weekNum + 0) % membros.length]
@@ -39,9 +39,13 @@ class Nasa {
 
   // Retorna a fila de membros sem alterá-la
   async fila() {
-    const membros = database.read("membros-nasa")
+    const membros = database.readColumn("membros-nasa").sort()
 
-    await webhook.send(`Fila:\n${membros.join("\n")}`)
+    await webhook.send(
+      membros.length > 0 
+        ? `Fila:\n${membros.join("\n")}`
+        : `Fila vazia ;-;`
+    )
   }
 }
 
