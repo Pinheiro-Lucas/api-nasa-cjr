@@ -2,9 +2,10 @@
   "name": "api-nasa-cjr",
   "version": "0.1",
   "description": "API para integrar funções no Slack",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,19 @@
   "homepage": "https://github.com/Pinheiro-Lucas/api-nasa-cjr#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "dayjs": "^1.11.5",
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.19"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.json"
+    ],
+    "events": {
+      "start": "clear"
+    }
   }
 }

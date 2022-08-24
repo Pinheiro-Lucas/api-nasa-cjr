@@ -1,7 +1,6 @@
 const axios = require("axios")
-const config = require("../config.json")
 
-const WEBHOOK_URL = config.webhook
+const WEBHOOK_URL = process.env.WEBHOOK
 
 // Função para facilitar o envio de webhook
 const send = async mensagem => {

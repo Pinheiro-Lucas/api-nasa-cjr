@@ -1,5 +1,0 @@
-{
-    "webhook": "",
-    "database": "./database/data.json",
-    "port": 3305
-}
