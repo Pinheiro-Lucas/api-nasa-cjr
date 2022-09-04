@@ -8,6 +8,7 @@ const router = Router()
 // Comandos
 router.post("/teste", nasa) // usa server diferente
 router.post("/nasa", nasa)
+router.post("/", ping)
 router.get("/", ping)
 
 module.exports = router
